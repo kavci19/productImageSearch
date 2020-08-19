@@ -36,8 +36,6 @@ def scan_barcodes():
                 line_count += 1
                 continue
             else:
-                if line_count==50:
-                    break
 
                 progress = (line_count/20000)*100
 
