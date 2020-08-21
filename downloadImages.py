@@ -32,7 +32,7 @@ def scan_barcodes():
         for row in csv_reader:
             print()
 
-            if line_count < 2673:
+            if line_count < 5716:
                 line_count += 1
                 continue
 
@@ -136,6 +136,16 @@ def download_image(barcode, name):
         enablePrint()
         return
 
+    except OSError:
+        try:
+            try_download(barcode, name)
+        except:
+            enablePrint()
+            return
+        enablePrint()
+        return
+
+
 
 
 
@@ -180,6 +190,8 @@ def try_download(barcode, name):
 
     except FileNotFoundError:
         unmatched_products.append([name,barcode])
+        return
+    except OSError:
         return
 
 
