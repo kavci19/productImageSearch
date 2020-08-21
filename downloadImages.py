@@ -32,14 +32,15 @@ def scan_barcodes():
         for row in csv_reader:
             print()
 
-            if line_count == 0:
+            if line_count < 2673:
                 line_count += 1
                 continue
+
             else:
 
                 progress = (line_count/20000)*100
 
-                print(str(progress) + '% done')
+                print(str(round(progress,2)) + '% done')
 
                 barcode = row[1]
                 name = row[0]
@@ -100,22 +101,38 @@ def download_image(barcode, name):
         enablePrint()
 
     except SystemExit:
-        try_download(barcode, name)
+        try:
+            try_download(barcode, name)
+        except:
+            enablePrint()
+            return
         enablePrint()
         return
 
     except IndexError:
-        try_download(barcode, name)
+        try:
+            try_download(barcode, name)
+        except:
+            enablePrint()
+            return
         enablePrint()
         return
 
     except FileExistsError:
-        #try_download(barcode, name)
+        try:
+            try_download(barcode, name)
+        except:
+            enablePrint()
+            return
         enablePrint()
         return
 
     except FileNotFoundError:
-        try_download(barcode, name)
+        try:
+            try_download(barcode, name)
+        except:
+            enablePrint()
+            return
         enablePrint()
         return
 
